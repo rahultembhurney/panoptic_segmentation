@@ -1,0 +1,13 @@
+dill
+from-root
+notebook
+gdown
+flask-cors
+flask
+matplotlib
+numpy
+pandas
+geopandas
+torchnet
+ipykernel
+-e .
