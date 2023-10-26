@@ -10,3 +10,13 @@ class DataIngestionConfig():
 
     )
     data_download_url:str = DATA_DOWNLOAD_URL
+
+@dataclass
+class DatasetPreparationConfig():
+    dataset_prepared_dir: str = os.path.join(
+        ARTIFACTS_DIR, DATASET_DIR
+    )
+    dataloader_download_url: str = PASTIS_BENCHMARK_URL
+    dataloader_dir: str = os.path.join(
+        ARTIFACTS_DIR, UNET_PAPS_BENCHMARK_DIR
+    )

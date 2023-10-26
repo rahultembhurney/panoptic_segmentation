@@ -12,4 +12,6 @@ torchnet
 ipykernel
 wget
 tqdm
+GitPython
+geopandas
 -e .

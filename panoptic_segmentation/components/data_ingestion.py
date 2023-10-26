@@ -6,7 +6,8 @@ from panoptic_segmentation.exception import AppException
 from panoptic_segmentation.logger import logging
 from panoptic_segmentation.entity.artifacts_entity import DataIngesionArtifacts
 from panoptic_segmentation.entity.config_entity import DataIngestionConfig
-import urllib
+from urllib.request import urlretrieve
+from pathlib import Path
 from tqdm import tqdm
 
 class DataIngestion():
@@ -22,17 +23,21 @@ class DataIngestion():
         Download the dataset from the url
         '''
         try:
-            logging.info(f"Downloading file from {self.data_ingestion_config.data_download_url}.\
-                          This may take some time...")
-            temp_path, _ = urllib.request.urlretrieve(self.data_ingestion_config.data_download_url)
-            logging.info(f"Download successful!")
-            return temp_path
+            if os.path.exists(self.data_ingestion_config.data_ingestion_dir)== True or os.path.getsize(self.data_ingestion_config.data_ingestion_dir) >0:
+                logging.info(f"File already exists at {self.data_ingestion_config.data_ingestion_dir}")
+                pass
+            else:
+                logging.info(f"Downloading file from {self.data_ingestion_config.data_download_url}.\
+                            This may take some time...")
+                temp_path, _ = urlretrieve(self.data_ingestion_config.data_download_url)
+                logging.info(f"Download successful!")
+                return temp_path
         
         except Exception as e:
             logging.info(f"{AppException(e, sys)}")
             raise AppException(e, sys)
         
-    def extract_files(self, temp_path):
+    def extract_files(self, temp_path=None):
         '''
         Unzip files from temporary location
         
@@ -41,14 +46,17 @@ class DataIngestion():
                 Temporary path of the file downloaded
         '''
         try:
-            logging.info(f"Creaing directory {self.data_ingestion_config.data_ingestion_dir}")
-            os.makedirs(self.data_ingestion_config.data_ingestion_dir, exist_ok=True)
+            if temp_path!= None:
+                logging.info(f"Creaing directory {self.data_ingestion_config.data_ingestion_dir}")
+                os.makedirs(self.data_ingestion_config.data_ingestion_dir, exist_ok=True)
 
-            logging.info(f"Directory created! unzipping files")
-            with ZipFile(temp_path, "r") as f:
-                f.extractall(self.data_ingestion_config.data_ingestion_dir)
-            logging.info(f"Unzip Successful!")
-            return self.data_ingestion_config.data_ingestion_dir
+                logging.info(f"Directory created! unzipping files")
+                with ZipFile(temp_path, "r") as f:
+                    f.extractall(self.data_ingestion_config.data_ingestion_dir)
+                logging.info(f"Unzip Successful!")
+                return self.data_ingestion_config.data_ingestion_dir
+            else:
+                pass
             
         except Exception as e:
             logging.info(f"{AppException(e, sys)}")
