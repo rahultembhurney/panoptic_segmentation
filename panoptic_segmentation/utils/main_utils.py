@@ -2,7 +2,7 @@ import torch
 import os
 import json
 from argparse import Namespace
-
+import git
 import matplotlib
 import matplotlib.pyplot as plt 
 from matplotlib.colors import ListedColormap
@@ -118,4 +118,22 @@ def plot_images(dataset, t_show, batch_index):
     except Exception as e:
         logging.info(f"{AppException(e, sys)}")
         raise (AppException(e, sys))
+    
+def clone_repo(repo_path, local_path):
+        '''
+        Clones the pastis benchmark repor containing dataloaders
+        '''
+        try:
+            logging.info(f"Making directory at {local_path}")
+            os.makedirs(local_path, exist_ok=True)
+
+            logging.info(f"Cloning rep from {repo_path}")
+            repo = git.Repo.clone_from(repo_path, local_path)
+
+            logging.info(f"Cloning Successful")
+            return local_path
+        
+        except Exception as e:
+            logging.info(f"{AppException(e, sys)}")
+            raise AppException(e, sys)
 

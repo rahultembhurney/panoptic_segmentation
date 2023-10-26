@@ -3,6 +3,8 @@ from panoptic_segmentation.exception import AppException
 import sys
 from panoptic_segmentation.pipeline.ingestion_pipeline \
                                             import IngestionPipeline
+from panoptic_segmentation.pipeline.preparation_pipeline \
+                                            import PrepareData
 
 logging.info(f"Custom logger working successfully")
 
@@ -15,7 +17,9 @@ logging.info(f"Custom logger working successfully")
 ingestion_obj = IngestionPipeline()
 ingestion_obj.ingest_data()
 logging.info(f"Done Ingesting")
-print(f"Done Ingesting")
 
+prepare_obj = PrepareData()
+prepare_obj.prepare_data()
+logging.info(f"Prepared Data")
 
 

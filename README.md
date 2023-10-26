@@ -16,6 +16,6 @@ Code implemented from the following repo: "https://github.com/VSainteuf/utae-pap
 # Progress
 
 1. Data Ingestion Pipeline - Working  ![100%](https://progress-bar.dev/100)
-2. Data Preparaion Pipeline - In Progress ![20%](https://progress-bar.dev/20)
+2. Data Preparaion Pipeline - In Progress ![100%](https://progress-bar.dev/100)
 3. Model Training Pipeline - Untouched ![0%](https://progress-bar.dev/0)
 4. Test Pipeline - Untouched ![0%](https://progress-bar.dev/0)
