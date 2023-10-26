@@ -1,7 +1,7 @@
 # panoptic_segmentation
 Panoptic Segmentation of PASTIS Dataset using UTAE + PaPs. 
 
-Dataset can be downloaded from here: "https://zenodo.org/records/5012942/files/PASTIS.zip"
+Dataset can be downloaded from here: "https://zenodo.org/records/5012942/files/PASTIS.zip" <br>
 Code implemented from the following repo: "https://github.com/VSainteuf/utae-paps.git"
 
 # Workflows
