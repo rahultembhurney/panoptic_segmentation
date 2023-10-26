@@ -13,17 +13,11 @@ class PrepareData():
 
     def prepare_data(self)-> DataPreparationArtifacts:
         try:
-            logging.info(f"Initiating data preparation pipeline")
-            if os.path.exists(UNET_PAPS_BENCHMARK_DIR) and os.path.getsize(UNET_PAPS_BENCHMARK_DIR)>0:
-                message = f"Folder already exists! Skipping preparation"
-                logging.info(message)
-                print(message)
-                pass
-            else:
-                data_preparation = DatasetPrepare()
-                data_preparation_artifacts = data_preparation.create_dataloader(self.data_preparaion_config.data_dir+"/PASTIS")
-                logging.info(f"Dataset preparation successful")
-                return data_preparation_artifacts
+            logging.info(f"Initiating data preparation pipeline")    
+            data_preparation = DatasetPrepare()
+            data_preparation_artifacts = data_preparation.create_dataloader(self.data_preparaion_config.data_dir+"/PASTIS")
+            logging.info(f"Dataset preparation successful")
+            return data_preparation_artifacts
         
         except Exception as e:
             logging.info(f"{AppException(e, sys)}")
