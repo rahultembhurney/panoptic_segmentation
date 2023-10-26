@@ -10,4 +10,6 @@ pandas
 geopandas
 torchnet
 ipykernel
+wget
+tqdm
 -e .
