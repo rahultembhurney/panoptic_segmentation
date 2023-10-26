@@ -109,10 +109,24 @@ class DatasetPrepare():
                           folder,
                           batch_size=2,
                           collate_fn=pad_collate,
-                          shuffle=True):
+                          shuffle=True,
+                          norm=True, target="semantic",
+                          cache=False, mem16=False,
+                          folds=None,
+                          reference_date="2018-09-01",
+                          class_mapping=None,
+                          mono_date=None,
+                          sats=["S2"],):
         try:
             logging.info(f"creating Pastis dataloader")
-            data = self.create_dataset(folder=self.data_preparation_config.data_dir + "/PASTIS")
+            data = self.create_dataset(folder=self.data_preparation_config.data_dir + "/PASTIS",
+                                       norm=norm,
+                                       cache=cache, mem16=mem16,
+                                       folds=folds,
+                                       reference_date=reference_date,
+                                       class_mapping=class_mapping,
+                                       mono_date=mono_date,
+                                       sats=sats)
             dataset = torch.utils.data.DataLoader(data, batch_size=batch_size,
                                               collate_fn=collate_fn,
                                               shuffle=shuffle)
